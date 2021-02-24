@@ -4,8 +4,7 @@ import { SurveyRepository } from "../repositories/SurveyRepository"
 
 class SurveyController{
     async create(req: Request, resp: Response){
-        try
-        {
+        
         const { title, description } = req.body;
 
         const surveyRepository = getCustomRepository(SurveyRepository)
@@ -16,22 +15,15 @@ class SurveyController{
         });
         await surveyRepository.save(survey);
 
-        return resp.status(201).json(survey)}
-        catch(error){
-            console.log (error);
-        }
-    }
+        return resp.status(201).json(survey)
+    };
+    
     async show (req: Request, resp: Response){
-        try {
         const surveyRepository = getCustomRepository(SurveyRepository);
 
         const all = await surveyRepository.find();
 
         return resp.json(all);
-        } 
-        catch(error){
-            console.log(error);
-        };
     }
 };
 

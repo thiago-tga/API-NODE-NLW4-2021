@@ -4,7 +4,6 @@ import { UsersRepository } from "../repositories/UserRepository";
 
 class UserController{
     async create(req: Request, resp: Response){
-       try{
          const { name, email } = req.body;
 
         const usersRepository = getCustomRepository(UsersRepository);
@@ -26,11 +25,8 @@ class UserController{
 
         await usersRepository.save(user);
         
-        return resp.json(user);}
-        catch{
-            console.error("nem deu certo filho");
-            
-        }
+        return resp.status(201).json(user);
+    
     };
 }
 
